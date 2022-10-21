@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://dev.dealon.pro/frontendTest",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {"^/api" : ""}
+  }
+}

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-12">
+    <p class="h1 py-3">Заявка на доставку автомобиля</p>
+  </div>
+  <form class="col-xl-4">
+    <div class="form-group my-3">
+      <label class="fw-bold" for="vinSelect">VIN автомобиля</label>
+      <select [disabled]="disableVINsSelect.value" class="form-select" name="vinSelect" id="vinSelect" [ngModel]="selectedVIN | async"
+              (ngModelChange)="selectedVIN.next($event)">
+        <option *ngFor="let VIN of VINs | async" [value]="VIN">
+          {{VIN}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group my-3">
+      <label class="fw-bold" for="fullNameInput">ФИО</label>
+      <input type="text" class="form-control" id="fullNameInput" placeholder="ФИО" name="fullNameInput" [ngModel]="fullName | async"
+             (ngModelChange)="fullName.next($event)">
+    </div>
+    <div class="form-group my-3">
+      <label class="fw-bold" for="phoneInput">Телефон</label>
+      <input type="text" class="form-control" id="phoneInput" placeholder="+7 (123) 456-78-90" name="phoneInput"
+             prefix="+7" mask=" (000) 000-00-00" [ngModel]="phone | async"
+             (ngModelChange)="phone.next($event)"
+      >
+    </div>
+    <div class="form-group my-3">
+      <label class="fw-bold" for="addressInput">Адрес доставки</label>
+      <input type="text" class="form-control" id="addressInput" placeholder="Адрес доставки" name="addressInput" [ngModel]="address | async"
+             (ngModelChange)="address.next($event)">
+    </div>
+    <div class="form-group my-3">
+      <label class="fw-bold" for="datepicker">Дата доставки</label>
+      <ngb-datepicker [minDate]="today" class="d-table" id="datepicker" name="datepicker"
+                      [ngModel]="selectedDate | async"
+                      (ngModelChange)="onSelectDate($event)"
+      ></ngb-datepicker>
+    </div>
+    <div class="form-group my-3">
+      <label class="fw-bold" for="timepicker">Время доставки</label>
+      <select [disabled]="disableTimeSelect.value" class="form-select" name="timepicker" id="timepicker" [ngModel]="selectedTime | async"
+              (ngModelChange)="selectedTime.next($event)">
+        <option *ngFor="let time of availableTime | async" [value]="time">
+          {{time}}
+        </option>
+      </select>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <div class="col-xl-4 mt-4">
+    <button type="button" class="btn btn-outline-primary w-100" (click)="save()">Подать заявку</button>
+  </div>
+</div>
