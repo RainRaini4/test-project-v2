@@ -25,7 +25,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   public disableTimeSelect: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
   public fullName: BehaviorSubject<string> = new BehaviorSubject<string>('')
   public address: BehaviorSubject<string> = new BehaviorSubject<string>('')
-  public phone: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined)
+  public phone: BehaviorSubject<string> = new BehaviorSubject<string>('')
 
 
   private selectedDateAsString: string = '';
@@ -63,7 +63,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
     const newOrder: IOrder[] = [{
       VIN: this.selectedVIN.value,
       fullName: this.fullName.value,
-      phone: this.phone.value,
+      phone: Number(this.phone.value),
       address: this.address.value,
       date: this.selectedDateAsString,
       time: this.selectedTime.value

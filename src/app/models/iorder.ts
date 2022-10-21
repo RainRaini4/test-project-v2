@@ -1,7 +1,7 @@
 export interface IOrder {
   VIN: string
   fullName: string
-  phone: number | undefined
+  phone: number
   address: string
   date: string
   time: string

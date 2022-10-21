@@ -2,7 +2,7 @@
   <div class="col-12">
     <a type="button" class="btn btn-outline-primary btn-lg" routerLink="/orderForm">Новая заявка</a>
   </div>
-  <div class="col-12">
+  <div class="col-12" *ngIf="tableData.value && tableData.value.length > 0">
     <table class="table">
       <thead>
         <tr>
@@ -21,11 +21,15 @@
           <td>{{row.VIN}}</td>
           <td>
             <pre>{{row.fullName}}</pre>
-            <pre>+7 {{row.phone}}</pre>
+            <pre>+7{{row.phone | mask: " (000) 000-00-00"}}</pre>
             <pre>{{row.address}}</pre>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="col-12" *ngIf="!tableData.value || tableData.value.length === 0">
+    <p class="h3 mt-4">Никто еще не оставил заявку</p>
   </div>
 </div>
