@@ -2,7 +2,7 @@
   <div class="col-12">
     <a type="button" class="btn btn-outline-primary btn-lg" routerLink="/orderForm">Новая заявка</a>
   </div>
-  <div class="col-12" *ngIf="tableData.value && tableData.value.length > 0">
+  <div class="col-12 mt-4" *ngIf="tableData.value && tableData.value.length > 0">
     <table class="table">
       <thead>
         <tr>
@@ -18,7 +18,7 @@
       <tbody>
         <tr *ngFor="let row of tableData | async">
           <td>{{row.date}} {{row.time}}</td>
-          <td>{{row.VIN}}</td>
+          <td class="ov-wrap-anywhere">{{row.VIN}}</td>
           <td>
             <pre>{{row.fullName}}</pre>
             <pre>+7{{row.phone | mask: " (000) 000-00-00"}}</pre>
