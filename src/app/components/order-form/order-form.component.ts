@@ -5,6 +5,7 @@ import {NgbCalendar, NgbDate, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import * as events from "events";
 import {IOrder} from "../../models/iorder";
 import {OrdersLocalService} from "../../services/orders-local.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-order-form',
@@ -35,7 +36,8 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   constructor(
     private orderHttpService : OrdersHttpService,
     private calendar: NgbCalendar,
-    private orderLocalStorage: OrdersLocalService
+    private orderLocalStorage: OrdersLocalService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +70,14 @@ export class OrderFormComponent implements OnInit, OnDestroy {
     }]
 
     this.orderLocalStorage.pushNewOrder(newOrder)
+    this.router.navigate(['/ordersDashboard'])
+  }
+
+  public isAllFormsValid() : boolean {
+    return !(this.selectedVIN.value.length === 0 || this.fullName.value.length === 0 ||
+      !this.phone.value || this.phone.value.toString().length < 10 || this.address.value.length === 0 ||
+      this.selectedTime.value.length === 0);
+
   }
 
   ngOnDestroy() {

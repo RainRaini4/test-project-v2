@@ -1,5 +1,31 @@
 <div class="row">
-  <div class="col">
+  <div class="col-12">
     <a type="button" class="btn btn-outline-primary btn-lg" routerLink="/orderForm">Новая заявка</a>
+  </div>
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Дата и время</th>
+          <th>VIN</th>
+          <th>
+            <pre>ФИО</pre>
+            <pre>Телефон</pre>
+            <pre>Адрес доставки</pre>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of tableData | async">
+          <td>{{row.date}} {{row.time}}</td>
+          <td>{{row.VIN}}</td>
+          <td>
+            <pre>{{row.fullName}}</pre>
+            <pre>+7 {{row.phone}}</pre>
+            <pre>{{row.address}}</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

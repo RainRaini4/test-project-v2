@@ -1,4 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {OrdersLocalService} from "../../services/orders-local.service";
+import {IOrder} from "../../models/iorder";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-orders-dashboard',
@@ -8,11 +11,12 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 })
 export class OrdersDashboardComponent implements OnInit {
 
-  constructor() {
+  public tableData: BehaviorSubject<IOrder[]> = new BehaviorSubject<IOrder[]>([])
+
+  constructor(private orderLocalStorage: OrdersLocalService,) {
   }
 
   ngOnInit(): void {
+    this.tableData.next(this.orderLocalStorage.getOrders())
   }
-
-
 }
