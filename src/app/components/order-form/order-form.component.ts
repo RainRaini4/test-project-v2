@@ -4,6 +4,7 @@ import {BehaviorSubject, map, Observable, Subject, Subscription} from "rxjs";
 import {NgbCalendar, NgbDate, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import * as events from "events";
 import {IOrder} from "../../models/iorder";
+import {OrdersLocalService} from "../../services/orders-local.service";
 
 @Component({
   selector: 'app-order-form',
@@ -33,7 +34,8 @@ export class OrderFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private orderHttpService : OrdersHttpService,
-    private calendar: NgbCalendar
+    private calendar: NgbCalendar,
+    private orderLocalStorage: OrdersLocalService
   ) { }
 
   ngOnInit(): void {
@@ -56,14 +58,16 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   }
 
   public save() {
-    const newOrder: IOrder = {
+    const newOrder: IOrder[] = [{
       VIN: this.selectedVIN.value,
       fullName: this.fullName.value,
       phone: this.phone.value,
       address: this.address.value,
       date: this.selectedDateAsString,
       time: this.selectedTime.value
-    }
+    }]
+
+    this.orderLocalStorage.pushNewOrder(newOrder)
   }
 
   ngOnDestroy() {
